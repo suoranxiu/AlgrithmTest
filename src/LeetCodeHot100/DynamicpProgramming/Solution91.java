@@ -26,61 +26,41 @@ public class Solution91 {
      * 输出: 3
      * 解释: 它可以解码为 "BZ" (2 26), "VF" (22 6), 或者 "BBF" (2 2 6) 。
      */
-    HashMap<Integer,Character> map = new HashMap<>();
 
-    {
-        map.put(1,'A');
-        map.put(2,'B');
-        map.put(3,'C');
-        map.put(4,'D');
-        map.put(5,'E');
-        map.put(6,'F');
-        map.put(7,'G');
-        map.put(8,'H');
-        map.put(9,'I');
-        map.put(10,'J');
-        map.put(11,'K');
-        map.put(12,'L');
-        map.put(13,'M');
-        map.put(14,'N');
-        map.put(15,'O');
-        map.put(16,'P');
-        map.put(17,'Q');
-        map.put(18,'R');
-        map.put(19,'S');
-        map.put(20,'T');
-        map.put(21,'U');
-        map.put(22,'V');
-        map.put(23,'W');
-        map.put(24,'X');
-        map.put(25,'Y');
-        map.put(26,'Z');
-    }
-    public int numDecodings(String s) {
+    public static int numDecodings(String s) {
+        if(s.charAt(0)=='0'){
+            return 0;
+        }
         if(s.length()==1){
             return 1;
         }
         int len = s.length();
         int[] ansArray = new int[len];
-
-        int L=0;
-        int R;
         ansArray[0] = 1;
-        if(check(s.substring(0,2))){
-            ansArray[1] = 2;
-        }else {
-            ansArray[1] = 1;
-        }
-        for(R = 2;R<len;R++){
-            if(check(s.substring(L,R+1))){
-                ansArray[R] = ansArray[R-2];
+
+        if(len >2){
+            for(int R = 2;R<len;R++){
+                char cur = s.charAt(R);
+                if(cur == '0'){
+                    if(s.charAt(R-1) == '1' || s.charAt(R-1) == '2'){
+                        ansArray[R] = ansArray[R-2];
+                    }else {
+                        return 0;
+                    }
+                }else if(s.charAt(R-1) == '1'){
+                    ansArray[R] = ansArray[R-1]+ansArray[R-2];
+                }else if(s.charAt(R-1) == '2' && '1'<=cur && cur<='6'){
+                    ansArray[R] = ansArray[R-1]+ansArray[R-2];
+                }
             }
         }
-        return 0;
+        return ansArray[len-1];
     }
 
-    private boolean check(String s){
-        int i = Integer.parseInt(s);
-        return 1<=i&&i<=26;
+
+    public static void main(String[] args) {
+        String a = "10";
+        System.out.println( Solution91.numDecodings(a));
+
     }
 }
