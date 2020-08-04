@@ -12,38 +12,45 @@ public class Solution15 {
     //排序 + 双指针
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        if(nums == null || nums.length <3){
+        if(nums.length <3){
             return result;
         }
         Arrays.sort(nums);
-        for (int i =0; i<nums.length;i++){
-            if(nums[i] >0){
-                return result;
-            }
-            if(i >0 && nums[i] == nums[i-1]){
+        if(nums[0] >0){
+            return result;
+        }
+        //三指针
+        int cur =0;
+        int left;
+        int right;
+        List<Integer> list;
+        for(;cur<nums.length;cur++){
+            if(cur!=0 && nums[cur]==nums[cur-1]){
                 continue;
             }
-            int L = i+1, R= nums.length-1;
-            while(L < R){
-                int sum = nums[i]+nums[L]+nums[R];
-                if(sum == 0){
-                    List<Integer> list  = new ArrayList<>();
-                    list.add(nums[i]);
-                    list.add(nums[L]);
-                    list.add(nums[R]);
+            int diff = -nums[cur];
+            left = cur+1;
+            right = nums.length-1;
+            while(left<right){
+                if(nums[left] + nums[right]<diff){
+                    left++;
+                }else if(nums[left]+nums[right] >diff){
+                    right--;
+                }else {
+                    list = new ArrayList<>();
+                    list.add(nums[cur]);
+                    list.add(nums[left]);
+                    list.add(nums[right]);
                     result.add(list);
-                    while(L < R && nums[L+1] == nums[L]){
-                        L++;
+                    while (left<right && nums[left] == nums[left+1]){
+                        left++;
                     }
-                    while(L < R && nums[R-1] == nums[R]){
-                        R--;
+                    while (left<right && nums[right-1] == nums[right]){
+                        right--;
                     }
-                    R++;
-                    L++;
-                }else if(sum > 0){
-                    R--;
-                }else if(sum < 0){
-                    L++;
+                    right--;
+                    left++;
+
                 }
             }
         }

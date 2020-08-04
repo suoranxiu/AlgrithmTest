@@ -1,5 +1,7 @@
 package LeetCodeHot100.String;
 
+import java.util.HashMap;
+
 public class Solution13 {
     /**
      * 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。
@@ -48,10 +50,45 @@ public class Solution13 {
         }
         return ans;
     }
+    private static HashMap<String,Integer> map = new HashMap<>();
+    static {
+        map.put("M",1000);
+        map.put("CM",900);
+        map.put("D",500);
+        map.put("CD",400);
+        map.put("C",100);
+        map.put("XC",90);
+        map.put("L",50);
+        map.put("XL",40);
+        map.put("X",10);
+        map.put("IX",9);
+        map.put("V",5);
+        map.put("IV",4);
+        map.put("I",1);
+    }
+    public static int romanToInt2(String s) {
+        StringBuilder stringBuilder = new StringBuilder(s);
+        int ans = 0;
+        if(s.length() == 0 ||s == null){
+            return ans;
+        }
+        while(stringBuilder.length() != 0){
+            if(stringBuilder.length() >=2 && map.containsKey(stringBuilder.substring(0,2))){
+                ans+= map.get(stringBuilder.substring(0,2));
+                stringBuilder.delete(0,2);
+            }else if(map.containsKey(stringBuilder.substring(0,1))){
+                ans+=map.get(stringBuilder.substring(0,1));
+                stringBuilder.delete(0,1);
+            }
+        }
+        return ans;
+    }
 
     public static void main(String[] args) {
-        System.out.println(Solution13.romanToInt("III"));
+//        System.out.println(Solution13.romanToInt("III"));
 //        StringBuilder stringBuilder = new StringBuilder("III");
 //        System.out.println("I".equals(stringBuilder.substring(0,1)));
+        System.out.println(romanToInt2("MCMXCIV"));
+
     }
 }

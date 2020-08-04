@@ -13,30 +13,9 @@ public class Solution17 {
      *输入："23"
      * 输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
      */
-    Map<String,String> numberMap = new HashMap<>();
-    List<String> result = new ArrayList<>();
-    //回溯算法
-    public List<String> letterCombinations(String digits) {
-        if(digits.length() == 0 || digits ==null){
-            return result;
-        }
-        initMap();
-        backTrack("",digits);
-
-        return result;
-    }
-    public void backTrack(String combination,String nextDigits){
-        if(nextDigits.length() == 0){
-            result.add(combination);
-        }else {
-            String digit = nextDigits.substring(0,1);
-            String letters = numberMap.get(digit);
-            for(int i =0;i<letters.length();i++){
-                String letter = letters.substring(i,i+1);
-                backTrack(combination+letter,nextDigits.substring(1));
-            }
-        }
-    }
+    private List<String> result;
+    private Map<String,String> numberMap = new HashMap<>();
+    private StringBuilder stringBuilder;
     public void initMap(){
         numberMap.put("2","abc");
         numberMap.put("3","def");
@@ -46,6 +25,30 @@ public class Solution17 {
         numberMap.put("7","pqrs");
         numberMap.put("8","tuv");
         numberMap.put("9","wxyz");
+    }
+    //回溯算法
+    public List<String> letterCombinations(String digits) {
+        result = new ArrayList<>();
+        if(digits.length()==0){
+            return result;
+        }
+        initMap();
+        stringBuilder = new StringBuilder();
+        backTrack(digits,0);
+        return result;
+    }
+    private void backTrack(String digits,int start){
+        if(start == digits.length()){
+            result.add(stringBuilder.toString());
+            return;
+        }
+        String curNum = digits.substring(start,start+1);//当前数字
+        String letters = numberMap.get(curNum);//当前数字对应的字符串
+        for(int i=0;i<letters.length();i++){//遍历当前数字对应的字符串
+            stringBuilder.append(letters.substring(i,i+1));
+            backTrack(digits,start+1);//继续找下一个数字
+            stringBuilder.delete(stringBuilder.length()-1,stringBuilder.length());//若到头了会删出当前sb最后一个字符，进入下一个循环
+        }
     }
 
 }

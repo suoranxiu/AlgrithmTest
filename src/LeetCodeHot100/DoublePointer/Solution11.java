@@ -15,7 +15,7 @@ public class Solution11 {
         while(i<j){
             int area = calArea(i,j,height);
             max = Math.max(area,max);
-            if(height[i]<=height[j]){
+            if(height[i]<=height[j]){//比较两边，哪边小，移动哪边
                 i++;
             }else {
                 j--;
