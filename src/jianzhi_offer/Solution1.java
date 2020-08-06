@@ -14,19 +14,26 @@ public class Solution1 {
      * @return
      */
     public static boolean Find(int target, int [][] array) {
-
-        if(array.length >0){
-            for(int i=0; i < array.length; i++){
-                for(int j=0; j < array.length; j++){
-                    if(target >= array[i][0]){
-                        if(target == array[i][j]){
-                            return true;
-                        }
-                    }else{
-                        return false;
-                    }
+        if(array[0].length == 0){
+            return false;
+        }
+        if(array.length ==1){
+            return array[0][0] == target;
+        }
+        int row = array.length;
+        int column = row;
+        for(int i =0;i<row;i++){
+            if(array[i][0]>target) {
+                return false;
+            }
+            for(int j =0;j<column;j++){
+                if(array[i][j] == target){
+                    return true;
+                }else if(array[i][j] > target){
+                    break;
                 }
             }
+
         }
         return false;
     }
