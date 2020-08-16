@@ -131,10 +131,9 @@ public class ClassicalSortAlgorithms {
     public int partition(int[] array,int left,int rightBorder){
         int ref = left;
         int index = ref+1;
-        for (int i = index;i<rightBorder;i++){
+        for (int i = index;i<=rightBorder;i++){
             if(array[i] < array[ref]){
-                swapArray(array,i,index);
-                index++;
+                swapArray(array,i,index++);
             }
         }
         swapArray(array,ref,index-1);
@@ -198,14 +197,14 @@ public class ClassicalSortAlgorithms {
     }
 
     public static void main(String[] args) {
-//        int [] a = new int[]{1,5,8,4,5,2,6,4,0,9,6};
-////        int [] a = new int[9];
-//        ClassicalSortAlgorithms function = new ClassicalSortAlgorithms();
-//        function.sort7(a);
-//        for(int i= 0;i<a.length;i++){
-//            System.out.print(a[i]+" ");
-//        }
-        System.out.println((56%10)/1 + 10);
+        int [] a = new int[]{20,15,14,18,21,36,40,10};
+//        int [] a = new int[9];
+        ClassicalSortAlgorithms function = new ClassicalSortAlgorithms();
+        function.sort6(a);
+        for(int i= 0;i<a.length;i++){
+            System.out.print(a[i]+" ");
+        }
+//        System.out.println((56%10)/1 + 10);
 
     }
 

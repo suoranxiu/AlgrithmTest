@@ -21,7 +21,6 @@ public class Solution24 {
         ListNode pre = new ListNode(0);
         pre.next = head;
         ListNode cur = pre;
-
         while(head != null && head.next != null){
             ListNode firstNode = head;
             ListNode secondNode = head.next;
@@ -34,7 +33,6 @@ public class Solution24 {
             head = firstNode.next;
         }
         return pre.next;
-
     }
 
     public ListNode swapPairsByReCur(ListNode head) {

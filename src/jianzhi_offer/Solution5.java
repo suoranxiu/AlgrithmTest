@@ -14,17 +14,13 @@ public class Solution5 {
             Mirror(root.right);
         }
     }
-
-
     /**
      * Definition for binary tree
      */
-
     static class TreeNode {
         int val =0;
         TreeNode left;
         TreeNode right;
-
         public TreeNode(int val) {
             this.val = val;
         }
