@@ -49,13 +49,11 @@ public class Solution40 {
         }
 
         for(int i =begin;i<candidates.length;i++){
-
             if(residue - candidates[i]<0){
                 break;
             }
             if(i>begin && candidates[i] == candidates[i-1]){
                 continue;
-
             }
             path.addLast(candidates[i]);
             DFS(candidates,residue - candidates[i],i+1,path,result);
@@ -65,5 +63,6 @@ public class Solution40 {
 
     public static void main(String[] args) {
         List<List<Integer>> ss = Solution40.combinationSum2(new int []{10,1,2,7,6,1,5},8);
+        System.out.println(ss.toString());
     }
 }
