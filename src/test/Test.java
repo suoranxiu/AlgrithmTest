@@ -1,6 +1,8 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Test {
@@ -60,12 +62,54 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        ListNode node1 = new ListNode(5);
-        ListNode node2 = new ListNode(5);
-        addTwoNumbers(node1,node2);
-
+        List<Integer> result = addToArrayForm(new int[]{2,7,4},181);
+        int a =1;
     }
 
+    public static List<Integer> addToArrayForm(int[] A, int K) {
+        List<Integer> list = new ArrayList<>();
+        int i = A.length-1;
+        int offset = 0;
+        while(K>0 && i>=0){
+            int ans = K%10 + A[i] + offset;
+            if(ans>=10){
+                list.add(ans%10);
+                offset = 1;
+            }else {
+                list.add(ans);
+                offset = 0;
+            }
+            i--;
+            K = K/10;
+        }
+        while(i>=0){
+            int ans = A[i] + offset;
+            if(ans>=10){
+                list.add(ans%10);
+                offset = 1;
+            }else {
+                list.add(ans);
+                offset = 0;
+            }
+            i--;
+        }
+        while(K>0){
+            int ans = K%10 + offset;
+            if(ans>=10){
+                list.add(ans%10);
+                offset = 1;
+            }else {
+                list.add(ans);
+                offset = 0;
+            }
+            K = K/10;
+        }
+        if(offset>0){
+            list.add(1);
+        }
+        Collections.reverse(list);
+        return list;
+    }
 }
 class ListNode {
     int val;

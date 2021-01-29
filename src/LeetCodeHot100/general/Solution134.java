@@ -1,4 +1,4 @@
-package LeetCodeHot100.greedAlgorithm;
+package LeetCodeHot100.general;
 
 public class Solution134 {
     /***

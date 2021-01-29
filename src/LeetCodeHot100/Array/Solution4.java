@@ -1,4 +1,4 @@
-package LeetCodeHot100.general;
+package LeetCodeHot100.Array;
 
 import java.util.Arrays;
 
